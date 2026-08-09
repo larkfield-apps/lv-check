@@ -682,6 +682,9 @@ button.copy.alt:hover{filter:none; border-color:var(--muted)}
 </div>
 </div>
 <script>
+// מספר היעד קבוע בכוונה: בלי זה הבודקת בוחרת נמען מרשימת אנשי הקשר,
+// ובחירה שגויה שולחת את התוצאות לאדם אקראי בלי שאיש ידע.
+const RECIPIENT='972542193195';
 const KEY='dialect_test_v1';
 const state=JSON.parse(localStorage.getItem(KEY)||'{}');
 
@@ -747,7 +750,7 @@ function summary(){
 function sendWhatsApp(){
   const t=summary();
   document.getElementById('out').value=t;
-  window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+  window.open('https://wa.me/'+RECIPIENT+'?text='+encodeURIComponent(t),'_blank');
 }
 function copyOut(){
   const t=summary(), out=document.getElementById('out');
