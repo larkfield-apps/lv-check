@@ -174,6 +174,65 @@
   .cert-section .eyebrow { color: var(--rose); }
   .cert-section li::marker { color: var(--rose); }
 
+  /* Maayan's black-and-white studio photos, warmed slightly for the antique palette */
+  .bw { filter: sepia(.16) contrast(1.03) brightness(1.02); }
+
+  /* Device mockups (built in CSS so the lesson screen can show real content) */
+  .devices-section { background: linear-gradient(180deg, var(--ground), #F3E2DE); overflow: clip; }
+  .devices-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 3rem; align-items: center; }
+  .devices-grid > * { min-width: 0; }
+  .devices-list { margin: 0; padding-inline-start: 1.1rem; }
+  .devices-list li { margin-bottom: .5rem; }
+  .devices-list li::marker { color: var(--gold); }
+  .devices { position: relative; aspect-ratio: 10 / 8; max-width: 100%; }
+  .devices .screen { background: #fff; overflow: hidden; }
+  .laptop .lid, .tablet { container-type: inline-size; }
+  .book { position: absolute; right: 4%; top: 0; width: 36%; aspect-ratio: 3 / 4.2; container-type: inline-size; filter: drop-shadow(0 26px 30px rgba(74,46,53,.35)); }
+  .book .cover { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; overflow: hidden; background: var(--plum); box-shadow: inset 7px 0 10px -6px rgba(0,0,0,.55); }
+  .book .cover::after { content: ""; position: absolute; inset: 5%; border: 1px solid var(--gold); opacity: .8; pointer-events: none; }
+  .book img { position: absolute; inset: 0 0 38% 0; width: 100%; height: 62%; object-fit: cover; object-position: 50% 20%; }
+  .book .cv-text { position: absolute; inset: auto 0 0 0; height: 38%; display: grid; place-content: center; text-align: center; gap: .25em; color: var(--gold-soft); padding: 0 8%; }
+  .book .cv-text small { font-family: var(--latin); font-style: italic; font-size: 6.5cqw; letter-spacing: .06em; }
+  .book .cv-text strong { font-family: var(--display); font-weight: 400; font-size: 13cqw; color: #F6E9E4; line-height: 1.05; }
+  .book .cv-text span { font-size: 6.2cqw; }
+  .laptop { position: absolute; left: 0; bottom: 9%; width: 80%; filter: drop-shadow(0 30px 34px rgba(40,24,28,.35)); }
+  .laptop .lid { background: #1D1B1C; border-radius: 14px 14px 0 0; padding: 2.4% 2.4% 3%; }
+  .laptop .screen { aspect-ratio: 16 / 10; border-radius: 2px; }
+  .laptop .base { height: 0; padding-top: 3.6%; margin-inline: -7%; background: linear-gradient(180deg, #E3E1E2, #A9A6A8); border-radius: 0 0 14px 14px; position: relative; }
+  .laptop .base::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 16%; height: 38%; background: #C9C6C8; border-radius: 0 0 8px 8px; }
+  .tablet { position: absolute; right: 0; bottom: 0; width: 31%; background: #1D1B1C; border-radius: 16px; padding: 3.2%; filter: drop-shadow(0 24px 26px rgba(40,24,28,.4)); }
+  .tablet .screen { aspect-ratio: 3 / 4; border-radius: 6px; }
+
+  .lesson { display: grid; grid-template-rows: auto 1fr auto; font-size: 2.2cqw; color: var(--ink); }
+  .ls-top { display: flex; justify-content: space-between; align-items: center; padding: 1.4% 2.4%; background: var(--plum); color: var(--gold-soft); }
+  .ls-top b { font-family: var(--latin); font-style: italic; font-weight: 500; }
+  .ls-body { display: grid; grid-template-columns: 1.9fr 1fr; gap: 2%; padding: 2.4%; min-height: 0; }
+  .ls-video { position: relative; border-radius: 1.2cqw; overflow: hidden; background: #000; }
+  .ls-video img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .92; }
+  .play { position: absolute; left: 50%; top: 50%; width: 11cqw; height: 11cqw; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(250,244,240,.9); }
+  .play::after { content: ""; position: absolute; left: 52%; top: 50%; transform: translate(-50%, -50%); border-style: solid; border-width: 2.2cqw 0 2.2cqw 3.6cqw; border-color: transparent transparent transparent var(--string-deep); }
+  .ls-bar { position: absolute; inset: auto 4% 5% 4%; height: .8cqw; background: rgba(255,255,255,.4); border-radius: 1cqw; }
+  .ls-bar i { position: absolute; inset: 0 0 0 auto; width: 38%; background: var(--string); border-radius: inherit; }
+  .ls-side { display: grid; align-content: start; gap: 3%; }
+  .ls-item { padding: 5% 7%; border-radius: .8cqw; background: #F6EEEA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ls-item.on { background: var(--blush); color: var(--string-deep); font-weight: 600; box-shadow: inset -.5cqw 0 0 var(--string-deep); }
+  .ls-item.done { color: var(--taupe); text-decoration: line-through; }
+  .ls-title { padding: 0 2.4% 2.4%; font-family: var(--display); font-size: 1.6em; }
+  .gallery-screen { font-size: 6cqw; padding: 6%; display: grid; grid-template-rows: auto 1fr; gap: 5%; }
+  .gs-title { font-weight: 600; color: var(--plum); }
+  .gs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4%; min-height: 0; }
+  .gs-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 2cqw; display: block; }
+
+  /* The real certificate */
+  .cert-photo { margin: 0 auto; max-width: 400px; width: 100%; position: relative; }
+  .cert-photo img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 40px 70px -30px rgba(74,46,53,.45); }
+  .cert-photo::before { content: ""; position: absolute; inset: -12px; border: 1px solid var(--gold); border-radius: 12px; opacity: .6; pointer-events: none; }
+
+  /* Work gallery */
+  .slides.work-slides { grid-auto-columns: calc((100% - 3.3rem) / 4); }
+  .work-card { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 18px; box-shadow: var(--shadow); transition: transform .6s var(--ease); }
+  .work-card:hover { transform: scale(1.03); }
+
   /* Marquee */
   .marquee { background: var(--plum); color: var(--gold-soft); overflow: hidden; padding-block: .75rem; border-block: 1px solid var(--gold); }
   .marquee-track { display: flex; width: max-content; animation: slide 38s linear infinite; }
@@ -340,6 +399,8 @@
     .chip-2 { inset-inline-end: -.4rem; }
     .mapping-grid { min-height: 0; }
     .facts-row, .tracks { grid-template-columns: 1fr; }
+    .devices-grid { grid-template-columns: minmax(0, 1fr); }
+    .slides.work-slides { grid-auto-columns: 70%; }
     .craft { grid-template-columns: 1fr; gap: 1.8rem; }
     .craft .frame { aspect-ratio: 4 / 3; }
     .steps li { margin-inline-end: 0 !important; }
@@ -359,7 +420,7 @@
 </head>
 <body>
 <a class="skip" href="#main">דילוג לתוכן</a>
-<div class="draft-bar">טיוטה לעיון (גרסה 3). התמונות הן תמונות המחשה ממאגר חינמי ויוחלפו בתמונות של מעיין. כל מה שמסומן בצהוב צריך אישור שלה.</div>
+<div class="draft-bar">טיוטה לעיון (גרסה 3). תמונות שמסומנות "תמונת המחשה" לקוחות ממאגר חינמי, וכל השאר הן של מעיין. מה שמסומן בצהוב מחכה לאישור שלה.</div>
 
 <header class="site-head" id="site-head">
   <div class="wrap top">
@@ -395,9 +456,8 @@
       <div class="arch-wrap" data-reveal>
         <div class="arch has-photo">
           <div class="arch-inner" id="arch-parallax">
-            <img class="photo" id="hero-photo" src="img/p29588096.jpg" alt="קוסמטיקאית מעצבת גבות ללקוחה בסטודיו" width="1400" height="933" fetchpriority="high">
+            <img class="photo bw" id="hero-photo" src="img/maayan-tweezers.jpg" alt="מעיין אוחיון מחזיקה פינצטה ליד הגבה" width="1133" height="1700" fetchpriority="high" style="object-position: 50% 18%">
           </div>
-          <span class="credit">תמונת המחשה · תוחלף בתמונה של מעיין</span>
         </div>
         <div class="chip chip-1"><strong>InLei®</strong>מדריכה מוסמכת</div>
         <div class="chip chip-2"><strong>299 ₪</strong>לקורס המלא</div>
@@ -411,6 +471,55 @@
       <span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span><span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span>
     </div>
   </div>
+
+  <section class="section devices-section" aria-labelledby="devices-title">
+    <div class="wrap devices-grid">
+      <div>
+        <p class="eyebrow" data-reveal>ככה נראה הקורס</p>
+        <h2 id="devices-title" data-reveal>שיעורים, חוברת ותעודה. הכול אצלך.</h2>
+        <p class="section-intro" data-reveal>נכנסים מהמחשב, מהטאבלט או מהטלפון, וממשיכים בדיוק מאיפה שעצרת.</p>
+        <ul class="devices-list" data-stagger>
+          <li>שיעורי וידאו שמצולמים מקרוב</li>
+          <li><span class="todo">חוברת הקורס להורדה (מעיין שולחת תמונה)</span></li>
+          <li>תעודת השתתפות אישית בסיום</li>
+        </ul>
+      </div>
+      <div class="devices" id="devices" aria-hidden="true">
+        <div class="book">
+          <div class="cover">
+            <img class="bw" src="img/maayan-spoolie.jpg" alt="" loading="lazy">
+            <div class="cv-text"><small>MAAYAN OHAYON ACADEMY</small><strong>חוברת הקורס</strong><span>עיצוב ושיקום גבות טבעיות</span></div>
+          </div>
+        </div>
+        <div class="laptop">
+          <div class="lid">
+            <div class="screen lesson">
+              <div class="ls-top"><b>Maayan Ohayon Academy</b><span>שיעור 2 מתוך 7</span></div>
+              <div class="ls-body">
+                <div class="ls-video"><img src="img/work-3.jpg" alt="" loading="lazy"><span class="play"></span><div class="ls-bar"><i></i></div></div>
+                <div class="ls-side">
+                  <div class="ls-item done">כלים והיגיינה</div>
+                  <div class="ls-item on">מיפוי גבה</div>
+                  <div class="ls-item">התאמת צורה</div>
+                  <div class="ls-item">טכניקות הסרה</div>
+                  <div class="ls-item">צביעה</div>
+                  <div class="ls-item">שיקום גבות</div>
+                </div>
+              </div>
+              <div class="ls-title">שיעור 2 · מיפוי גבה</div>
+            </div>
+          </div>
+          <div class="base"></div>
+        </div>
+        <div class="tablet">
+          <div class="screen gallery-screen">
+            <div class="gs-title">לפני שמתחילים לתרגל</div>
+            <div class="gs-grid"><img src="img/work-6.jpg" alt="" loading="lazy"><img src="img/work-2.jpg" alt="" loading="lazy"><img src="img/work-5.jpg" alt="" loading="lazy"><img src="img/work-8.jpg" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="mapping" id="method" aria-labelledby="method-title">
     <div class="wrap mapping-grid">
@@ -448,15 +557,15 @@
       <p class="section-intro" data-reveal>כל שלב מצולם מקרוב, כך שרואים בדיוק איפה היד עובדת.</p>
       <div class="craft">
         <figure>
-          <div class="frame"><img class="photo" src="img/p5177990.jpg" alt="קוסמטיקאית מודדת גבה בעזרת עיפרון" width="1400" height="933" loading="lazy" style="object-position: 55% 30%"><span class="credit">תמונת המחשה</span></div>
-          <figcaption><strong>מדידה</strong><span>מיפוי עם עיפרון לפני שנוגעים בשערה.</span></figcaption>
+          <div class="frame"><img class="photo bw" src="img/maayan-ruler.jpg" alt="מעיין מודדת גבה בעזרת סרגל גבות" width="1700" height="1472" loading="lazy" style="object-position: 45% 20%"></div>
+          <figcaption><strong>מדידה</strong><span>מודדים ומסמנים לפני שנוגעים בשערה.</span></figcaption>
         </figure>
         <figure>
-          <div class="frame"><img class="photo" src="img/p8558247.jpg" alt="סימון קו הגבה בעיפרון ומברשת" width="1400" height="933" loading="lazy" style="object-position: 60% 30%"><span class="credit">תמונת המחשה</span></div>
-          <figcaption><strong>סימון</strong><span>מסמנים את הצורה שנבחרה על הפנים.</span></figcaption>
+          <div class="frame"><img class="photo bw" src="img/maayan-brush.jpg" alt="מעיין מסרקת את הגבה עם מברשת" width="1700" height="1399" loading="lazy" style="object-position: 50% 20%"></div>
+          <figcaption><strong>עיצוב</strong><span>מסרקים ומעצבים את הצורה שנבחרה.</span></figcaption>
         </figure>
         <figure>
-          <div class="frame"><img class="photo" src="img/p5177994.jpg" alt="הסרת שערות עודפות בפינצטה" width="1400" height="933" loading="lazy" style="object-position: 70% 30%"><span class="credit">תמונת המחשה</span></div>
+          <div class="frame"><img class="photo" src="img/p5177994.jpg" alt="הסרת שערות עודפות בפינצטה" width="1400" height="933" loading="lazy" style="object-position: 70% 30%; filter: grayscale(1) sepia(.16) contrast(1.05)"><span class="credit">תמונת המחשה</span></div>
           <figcaption><strong>הסרה</strong><span>מסירים רק את מה שמחוץ לקווים.</span></figcaption>
         </figure>
       </div>
@@ -490,7 +599,7 @@
         <div class="track track-pro">
           <span class="track-tag">כמקצוע</span>
           <h3>לקבל לקוחות ראשונות</h3>
-          <ul><li>ייעוץ ללקוחה והתאמת צורה</li><li>היגיינה, סטריליזציה ובדיקת רגישות</li><li>תמחור טיפול ובניית קהל ראשון</li><li>תעודת סיום מטעם האקדמיה</li></ul>
+          <ul><li>ייעוץ ללקוחה והתאמת צורה</li><li>היגיינה, סטריליזציה ובדיקת רגישות</li><li>תמחור טיפול ובניית קהל ראשון</li><li>תעודת השתתפות מטעם האקדמיה</li></ul>
         </div>
       </div>
       <div class="cta-row"><a class="btn" href="#signup">לשריון מקום <span class="arrow" aria-hidden="true">←</span></a></div>
@@ -530,21 +639,17 @@
     </div>
   </section>
 
-  <section class="section cert-section" aria-labelledby="cert-title">
-    <img class="photo bg" id="cert-bg" src="img/p18809795.jpg" alt="" width="1400" height="933" loading="lazy" style="object-position: 20% 40%">
+  <section class="section section-blush" aria-labelledby="cert-title">
     <div class="wrap cert">
-      <div class="cert-card" id="cert-card" aria-hidden="true">
-        <div class="academy">MAAYAN OHAYON ACADEMY</div>
-        <div class="cert-title">תעודת סיום</div>
-        <div>קורס דיגיטלי לעיצוב וסידור גבות</div>
-        <div class="cert-name">שם הבוגרת</div>
-        <div class="cert-foot"><div class="sign">מעיין אוחיון</div><div class="seal">M.O</div></div>
-      </div>
+      <figure class="cert-photo" id="cert-card">
+        <img src="img/certificate.jpg" alt="תעודת ההשתתפות של Maayan Ohayon בקורס Eyebrow Shaping & Rehabilitation" width="972" height="1375" loading="lazy">
+      </figure>
       <div>
         <p class="eyebrow" data-reveal>בסוף הקורס</p>
         <h2 id="cert-title" data-reveal>תעודה וליווי</h2>
         <ul data-stagger>
-          <li><span class="todo">תעודת סיום מטעם האקדמיה (לאשר מה בדיוק היא מאשרת)</span></li>
+          <li>תעודת השתתפות אישית עם השם שלך, מטעם Maayan Ohayon</li>
+          <li>הקורס שמופיע בתעודה: Eyebrow Shaping &amp; Rehabilitation</li>
           <li><span class="todo">מענה לשאלות בוואטסאפ לאורך הקורס (לאשר זמינות)</span></li>
           <li><span class="todo">משוב של מעיין על תמונות העבודה שלך (לאשר)</span></li>
         </ul>
@@ -554,7 +659,7 @@
 
   <section class="section" id="about" aria-labelledby="about-title">
     <div class="wrap about">
-      <div class="arch" data-reveal><div class="arch-inner">תמונה של מעיין<br>(אמיתית, מהצילומים שלה)</div></div>
+      <div class="arch has-photo" data-reveal><img class="photo bw" src="img/maayan-smile.jpg" alt="מעיין אוחיון מחייכת ומחזיקה פינצטה" width="1700" height="1529" loading="lazy" style="object-position: 52% 25%"></div>
       <div>
         <p class="hello" data-reveal>היי, אני מעיין</p>
         <h2 id="about-title" data-reveal>על מעיין</h2>
@@ -573,23 +678,27 @@
     <div class="wrap">
       <div class="proof-head">
         <div>
-          <p class="eyebrow" data-reveal>עבודות ובוגרות</p>
-          <h2 id="work-title" data-reveal>מה אומרות עליה</h2>
-          <p class="section-intro" data-reveal>רק תמונות וציטוטים אמיתיים, באישור הלקוחות.</p>
+          <p class="eyebrow" data-reveal>מהסטודיו של מעיין</p>
+          <h2 id="work-title" data-reveal>גבות שמעיין עיצבה ושיקמה</h2>
+          <p class="section-intro" data-reveal>ככה נראית התוצאה כשעובדים לפי השיטה.</p>
         </div>
         <div class="car-ctrl">
           <button type="button" id="car-prev" aria-label="הקודם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
-          <span class="car-status" id="car-status" aria-live="polite">1 מתוך 5</span>
+          <span class="car-status" id="car-status" aria-live="polite">1 מתוך 8</span>
           <button type="button" id="car-next" aria-label="הבא"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
         </div>
       </div>
-      <ul class="slides" id="slides" tabindex="0" aria-label="עבודות והמלצות">
-        <li><div class="placeholder slide-card">לפני / אחרי</div></li>
-        <li><div class="placeholder slide-card">צילום מסך מההיילייט "אתן כתבתן"</div></li>
-        <li><div class="placeholder slide-card">לפני / אחרי</div></li>
-        <li><div class="placeholder slide-card">צילום מסך מההיילייט "אתן כתבתן"</div></li>
-        <li><div class="placeholder slide-card">לפני / אחרי</div></li>
+      <ul class="slides work-slides" id="slides" tabindex="0" aria-label="עבודות של מעיין">
+        <li><img class="work-card" src="img/work-3.jpg" alt="גבה מעוצבת ומלאה אחרי טיפול" width="550" height="485" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-6.jpg" alt="גבה בצורת קשת מודגשת אחרי טיפול" width="550" height="500" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-5.jpg" alt="גבה עבה ומסורקת כלפי מעלה" width="550" height="515" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-1.jpg" alt="גבה טבעית מלאה" width="550" height="475" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-7.jpg" alt="גבה מעוצבת בתקריב" width="550" height="465" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-2.jpg" alt="גבה דקה ומדויקת" width="550" height="475" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-8.jpg" alt="גבה טבעית עם שערות מסורקות" width="550" height="462" loading="lazy"></li>
+        <li><img class="work-card" src="img/work-4.jpg" alt="גבה מעוצבת בזווית צד" width="550" height="505" loading="lazy"></li>
       </ul>
+      <p class="section-intro" style="margin-top:1.5rem"><span class="todo">כאן יתווספו המלצות מההיילייט "אתן כתבתן" (באישור הכותבות)</span></p>
     </div>
   </section>
 
@@ -616,7 +725,7 @@
         <p class="section-intro" data-reveal>משאירים פרטים, בלי תשלום עכשיו. נרשמות מוקדמות מקבלות הודעה ראשונות כשהקורס נפתח.</p>
         <div class="price-box" data-reveal>
           <div class="amount">299 <small>₪</small></div>
-          <ul><li>כל שיעורי הקורס</li><li>לשימוש עצמי או כמקצוע</li><li>תעודת סיום מטעם האקדמיה</li></ul>
+          <ul><li>כל שיעורי הקורס</li><li>לשימוש עצמי או כמקצוע</li><li>תעודת השתתפות מטעם האקדמיה</li></ul>
         </div>
       </div>
       <form id="signup-form" novalidate data-reveal>
@@ -736,7 +845,10 @@
   gsap.fromTo('#hero-photo', { scale: 1.14 }, { scale: 1, duration: 9, ease: 'power1.out' });
   /* Craft photos wipe up into view, then drift slightly while scrolling */
   gsap.to('.craft .frame', { clipPath: 'inset(0% 0 0 0 round 22px)', duration: 1.2, ease: 'expo.inOut', stagger: 0.15, scrollTrigger: { trigger: '.craft', start: 'top 80%', once: true } });
-  gsap.fromTo('#cert-bg', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.cert-section', start: 'top bottom', end: 'bottom top', scrub: true } });
+  /* Devices settle into a composition */
+  gsap.fromTo('#devices .book', { y: -40, rotation: 6, opacity: 0 }, { y: 0, rotation: 0, opacity: 1, duration: 1.3, ease: ease, scrollTrigger: { trigger: '#devices', start: 'top 80%', once: true } });
+  gsap.fromTo('#devices .laptop', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.3, ease: ease, delay: 0.1, scrollTrigger: { trigger: '#devices', start: 'top 80%', once: true } });
+  gsap.fromTo('#devices .tablet', { x: 60, y: 30, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 1.3, ease: ease, delay: 0.25, scrollTrigger: { trigger: '#devices', start: 'top 80%', once: true } });
   gsap.to('#arch-parallax', { yPercent: -7, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* Generic reveals */
@@ -752,7 +864,7 @@
   gsap.to('.steps li', { clipPath: 'inset(0 0 0 0%)', duration: 1, ease: ease, stagger: 0.12, scrollTrigger: { trigger: '.steps', start: 'top 80%', once: true } });
 
   /* Certificate settles into place while scrolling */
-  gsap.fromTo('#cert-card', { rotation: -14, y: 80, opacity: 0 }, { rotation: -2.5, y: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.cert', start: 'top 85%', end: 'top 35%', scrub: 0.6 } });
+  gsap.fromTo('#cert-card', { rotation: -8, y: 80, opacity: 0 }, { rotation: 0, y: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.cert', start: 'top 85%', end: 'top 40%', scrub: 0.6 } });
 
   /* The method lesson: pinned on desktop, lines draw as you scroll */
   var stepsEls = gsap.utils.toArray('.step');
