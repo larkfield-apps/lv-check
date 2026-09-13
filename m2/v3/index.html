@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>מעיין אוחיון · קורס סידור גבות</title>
+<script>
+  // Motion is opt-in: only hide reveal targets when motion is allowed and JS runs.
+  (function () {
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]static\b/.test(location.search);
+    if (!still) {
+      document.documentElement.classList.add('js-motion');
+      setTimeout(function () { if (!window.gsap) document.documentElement.classList.remove('js-motion'); }, 4000);
+    }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #FBF5F4;
+    --blush: #F2DEDA;
+    --ink: #2A1F1C;
+    --taupe: #7A665C;
+    --string: #D63A6F;
+    --string-deep: #B72A5B;
+    --line: #E6D2CD;
+    --plum: #3A1E2A;
+    --plum-2: #6B2E47;
+    --rose: #D98BA6;
+    --shadow: 0 1px 2px rgba(58,30,42,.06), 0 18px 40px -18px rgba(58,30,42,.28);
+    --display: "Bellefair", "Times New Roman", serif;
+    --body: "IBM Plex Sans Hebrew", "Segoe UI", Arial, sans-serif;
+    --ease: cubic-bezier(.16,1,.3,1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--body); font-size: 1.0625rem; line-height: 1.7;
+    overflow-x: clip;
+  }
+  img { max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--string-deep); outline-offset: 3px; }
+  button { font: inherit; }
+
+  .skip { position: absolute; inset-inline-start: 1rem; top: -3rem; background: var(--ink); color: #fff; padding: .5rem 1rem; z-index: 50; }
+  .skip:focus { top: 1rem; }
+  .draft-bar { background: #FFF1A8; color: #4A3F00; font-size: .875rem; text-align: center; padding: .45rem 1rem; }
+  .todo { background: #FFF1A8; color: #4A3F00; box-shadow: 0 0 0 2px #FFF1A8; border-radius: 2px; }
+
+  .wrap { max-width: 1160px; margin-inline: auto; padding-inline: 20px; }
+
+  /* Sticky header that condenses on scroll */
+  .site-head { position: sticky; top: 0; z-index: 30; transition: background .35s var(--ease), box-shadow .35s var(--ease), backdrop-filter .35s; }
+  .site-head.scrolled { background: rgba(251,245,244,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; }
+  .brand { font-family: var(--display); font-size: 1.6rem; line-height: 1; text-decoration: none; }
+  .brand small { display: block; font-family: var(--body); font-size: .75rem; color: var(--taupe); letter-spacing: .02em; margin-top: .3rem; }
+  .top nav { display: flex; gap: 1.4rem; align-items: center; font-size: .95rem; }
+  .top nav a:not(.btn) { text-decoration: none; color: var(--taupe); position: relative; }
+  .top nav a:not(.btn)::after { content: ""; position: absolute; inset-inline: 0; bottom: -2px; height: 1px; background: var(--string); transform: scaleX(0); transition: transform .35s var(--ease); }
+  .top nav a:not(.btn):hover { color: var(--ink); }
+  .top nav a:not(.btn):hover::after { transform: scaleX(1); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: .6rem; background: var(--string-deep); color: #fff; text-decoration: none;
+    font-weight: 600; font-size: 1rem; border: 0; cursor: pointer; min-height: 44px;
+    padding: .85rem 1.7rem; border-radius: 999px; position: relative; overflow: hidden; isolation: isolate;
+    box-shadow: 0 10px 24px -12px rgba(183,42,91,.7); transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .btn::before { content: ""; position: absolute; inset: 0; background: var(--plum); border-radius: inherit; transform: translateY(101%); transition: transform .45s var(--ease); z-index: -1; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(58,30,42,.7); }
+  .btn:hover::before { transform: translateY(0); }
+  .btn .arrow { transition: transform .35s var(--ease); }
+  .btn:hover .arrow { transform: translateX(-4px); }
+  .btn-small { padding: .45rem 1.1rem; font-size: .9rem; min-height: 40px; }
+  .cta-row { margin-top: 2.75rem; text-align: center; }
+
+  /* Hero */
+  .hero { position: relative; overflow: clip; isolation: isolate; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; min-height: min(760px, calc(100svh - 110px)); padding-block: 2rem 4rem; }
+  .hero-grid > * { min-width: 0; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; z-index: -1; pointer-events: none; }
+  .blob-1 { width: 420px; height: 420px; background: #F4C6D4; inset-inline-end: -120px; top: 40px; animation: drift 16s ease-in-out infinite alternate; }
+  .blob-2 { width: 320px; height: 320px; background: #F7E1D6; inset-inline-start: 5%; bottom: -60px; animation: drift 20s ease-in-out infinite alternate-reverse; }
+  @keyframes drift { to { transform: translate(40px, -30px) scale(1.08); } }
+
+  .kicker { display: inline-flex; align-items: center; gap: .55rem; font-size: .88rem; font-weight: 500; color: var(--string-deep); background: #fff; border: 1px solid var(--line); padding: .3rem .85rem; border-radius: 999px; margin: 0 0 1.4rem; }
+  .kicker .pulse { width: .5rem; height: .5rem; border-radius: 50%; background: var(--string); box-shadow: 0 0 0 0 rgba(214,58,111,.5); animation: pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(214,58,111,0); } 100% { box-shadow: 0 0 0 0 rgba(214,58,111,0); } }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 6.6vw, 5.8rem); line-height: 1; margin: 0 0 1.5rem; letter-spacing: -.01em; }
+  h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .1em; margin-bottom: -.1em; }
+  h1 .w > span { display: inline-block; }
+  h1 em { font-style: normal; color: var(--string-deep); }
+  .js-motion h1 .w > span { transform: translateY(110%); }
+  .lede { font-size: 1.2rem; max-width: 36ch; margin: 0 0 2rem; }
+  .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; }
+  .hero-cta p { margin: 0; font-size: .92rem; color: var(--taupe); }
+  .price-inline { font-family: var(--display); font-weight: 400; font-size: 1.6rem; color: var(--ink); vertical-align: -.1em; }
+
+  /* The arch: a portrait frame shaped like a brow arch */
+  .arch-wrap { position: relative; max-width: 440px; margin-inline: auto; width: 100%; }
+  .arch {
+    position: relative; aspect-ratio: 4 / 5; max-width: 100%; border-radius: 999px 999px 28px 28px; overflow: hidden;
+    background: radial-gradient(120% 80% at 50% 30%, #FFF7F5 0%, #F6DAD9 55%, #E9B9C4 100%);
+    box-shadow: var(--shadow);
+  }
+  .arch-inner { position: absolute; inset: -6% 0; display: grid; place-items: center; }
+  .arch-inner svg { width: 92%; height: auto; }
+  .arch::after { /* film grain for a photographic surface */
+    content: ""; position: absolute; inset: 0; opacity: .22; mix-blend-mode: multiply; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .3 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .arch-note { position: absolute; inset-inline: 0; bottom: 1rem; text-align: center; font-size: .78rem; z-index: 2; }
+  .chip {
+    position: absolute; z-index: 3; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px; padding: .6rem .95rem; box-shadow: var(--shadow); font-size: .85rem; line-height: 1.35;
+    animation: float 6s ease-in-out infinite alternate;
+  }
+  .chip strong { display: block; font-size: 1rem; }
+  .chip-1 { inset-inline-start: -2.2rem; top: 18%; }
+  .chip-2 { inset-inline-end: -1.6rem; bottom: 16%; animation-delay: -3s; }
+  .chip-2 strong { font-family: var(--display); font-weight: 400; font-size: 1.7rem; color: var(--string-deep); line-height: 1; }
+  @keyframes float { to { transform: translateY(-12px); } }
+
+  /* Photography */
+  .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .arch .photo { object-position: 42% 40%; }
+  .arch.has-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(58,30,42,0) 55%, rgba(58,30,42,.35)); pointer-events: none; }
+  .credit { position: absolute; z-index: 2; inset-inline-end: .75rem; top: .75rem; font-size: .7rem; color: #fff; background: rgba(42,31,28,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: .15rem .6rem; border-radius: 999px; }
+  .arch .credit { top: auto; bottom: 1rem; left: 50%; right: auto; transform: translateX(-50%); white-space: nowrap; }
+
+  .photo-map { position: relative; aspect-ratio: 1400 / 934; max-width: 100%; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); }
+  .photo-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .photo-map .map-line { stroke-width: 4.5; filter: drop-shadow(0 0 3px rgba(255,255,255,.6)); }
+  .photo-map .dot { stroke: #fff; stroke-width: 5; }
+  .photo-map .label { font-size: 34px; paint-order: stroke; stroke: #fff; stroke-width: 12px; stroke-linejoin: round; }
+  .photo-map .meet { font-family: var(--body); font-size: 28px; font-weight: 600; fill: #fff; paint-order: stroke; stroke: rgba(58,30,42,.55); stroke-width: 8px; }
+
+  .craft { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  .craft figure { margin: 0; }
+  .craft .frame { position: relative; aspect-ratio: 3 / 4; max-width: 100%; border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+  .craft .photo { transition: transform 1.2s var(--ease); }
+  .craft figure:hover .photo { transform: scale(1.06); }
+  .craft figcaption { padding: .9rem .2rem 0; }
+  .craft figcaption strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.2; }
+  .craft figcaption span { color: var(--taupe); font-size: .95rem; }
+  .js-motion .craft .frame { clip-path: inset(100% 0 0 0 round 22px); }
+
+  .cert-section { position: relative; overflow: clip; isolation: isolate; color: #fff; }
+  .cert-section .bg { position: absolute; inset: -10% 0 auto; height: 120%; z-index: -2; }
+  .cert-section .cert-card { color: var(--ink); }
+  .cert-section::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(58,30,42,.25), rgba(58,30,42,.88) 60%); }
+  .cert-section .eyebrow { color: var(--rose); }
+  .cert-section li::marker { color: var(--rose); }
+
+  /* Marquee */
+  .marquee { background: var(--string-deep); color: #fff; overflow: hidden; padding-block: .75rem; }
+  .marquee-track { display: flex; width: max-content; animation: slide 38s linear infinite; }
+  .marquee-track span { font-family: var(--display); font-size: 1.35rem; white-space: nowrap; padding-inline: 1.4rem; }
+  .marquee-track span::after { content: "✦"; font-size: .8rem; margin-inline-start: 2.8rem; opacity: .7; vertical-align: middle; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* Sections */
+  .section { padding-block: 5.5rem; }
+  .section-blush { background: var(--blush); }
+  .section-plum { background: var(--plum); color: #fff; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1.08; margin: 0 0 1rem; }
+  .eyebrow { font-size: .85rem; font-weight: 600; color: var(--string-deep); margin: 0 0 .6rem; }
+  .section-plum .eyebrow { color: var(--rose); }
+  .section-intro { max-width: 52ch; margin: 0 0 3rem; color: var(--taupe); }
+  .section-plum .section-intro { color: #E8CBD6; }
+  .js-motion [data-reveal] { opacity: 0; }
+  .js-motion [data-stagger] > * { opacity: 0; }
+
+  /* Pinned mapping lesson */
+  .mapping { background: linear-gradient(180deg, var(--ground), #F8ECEA); }
+  .mapping-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; min-height: min(100svh, 920px); padding-block: 4rem; }
+  .mapping-grid > * { min-width: 0; }
+  .mapping-figure svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 30px 40px rgba(58,30,42,.08)); }
+  .mapping .lid, .mapping .nose, .arch .lid { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; }
+  .map-line { fill: none; stroke: var(--string); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .dot { fill: var(--string); }
+  .label { font-family: var(--body); font-size: 15px; font-weight: 600; fill: var(--string-deep); text-anchor: middle; }
+  .steps-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
+  .step { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.1rem 1.2rem; border-radius: 16px; background: #fff; box-shadow: var(--shadow); }
+  .step .n { font-family: var(--display); font-size: 2.4rem; line-height: 1; color: var(--string); }
+  .step h3 { margin: 0 0 .15rem; font-size: 1.08rem; font-weight: 600; }
+  .step p { margin: 0; color: var(--taupe); font-size: .96rem; }
+  .js-motion .step { opacity: .3; }
+
+  /* Facts */
+  .facts-row { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  .facts-row li { background: #fff; border-radius: 18px; padding: 1.4rem; display: flex; gap: .85rem; align-items: flex-start; box-shadow: var(--shadow); transition: transform .4s var(--ease); }
+  .facts-row li:hover { transform: translateY(-4px); }
+  .facts-row svg { flex: none; width: 2.2rem; height: 2.2rem; padding: .45rem; border-radius: 50%; background: var(--blush); stroke: var(--string-deep); }
+  .facts-row strong { display: block; font-weight: 600; }
+  .facts-row span { color: var(--taupe); font-size: .95rem; }
+
+  /* Tracks */
+  .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .track { background: var(--ground); border-radius: 22px; padding: 2rem 2.1rem; min-width: 0; position: relative; overflow: hidden; transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .track:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .track-pro { background: var(--plum); color: #fff; }
+  .track-tag { display: inline-block; font-size: .8rem; font-weight: 600; color: var(--string-deep); background: #fff; padding: .15rem .7rem; border-radius: 999px; margin-bottom: .9rem; }
+  .track h3 { font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1.12; margin: 0 0 1rem; }
+  .track ul { margin: 0; padding-inline-start: 1.1rem; }
+  .track li { margin-bottom: .45rem; }
+  .track li::marker { color: var(--string); }
+  .track-pro li::marker { color: var(--rose); }
+
+  /* Why digital: bars that unroll from the reading start */
+  .steps { list-style: none; margin: 0 auto; padding: 0; max-width: 780px; display: grid; gap: .55rem; }
+  .steps li { border-radius: 12px; padding: 1rem 1.4rem; display: flex; flex-wrap: wrap; gap: .2rem .6rem; align-items: baseline; }
+  .steps strong { font-weight: 600; }
+  .steps li:nth-child(1) { background: var(--plum-2); color: #fff; }
+  .steps li:nth-child(2) { background: var(--string-deep); color: #fff; margin-inline-end: 3%; }
+  .steps li:nth-child(3) { background: var(--rose); color: var(--plum); margin-inline-end: 6%; }
+  .steps li:nth-child(4) { background: var(--blush); color: var(--plum); margin-inline-end: 9%; }
+  .steps li:nth-child(5) { background: #fff; color: var(--plum); margin-inline-end: 12%; }
+  .js-motion .steps li { clip-path: inset(0 0 0 100%); }
+
+  /* Curriculum */
+  .modules { list-style: none; margin: 0; padding: 0; counter-reset: mod; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 3rem; }
+  .modules li { counter-increment: mod; display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; padding-block: 1.3rem; border-bottom: 1px solid var(--line); }
+  .modules li > div { min-width: 0; }
+  .modules li::before { content: counter(mod); font-family: var(--display); font-size: 2.6rem; line-height: 1; color: var(--string); }
+  .modules h3 { font-size: 1.1rem; font-weight: 600; margin: 0 0 .25rem; }
+  .modules p { margin: 0; color: var(--taupe); font-size: .98rem; }
+
+  /* Certificate */
+  .cert { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+  .cert > * { min-width: 0; }
+  .cert-card {
+    position: relative; background: #fff; border-radius: 6px; padding: 2.6rem 2rem 2rem; text-align: center;
+    box-shadow: 0 1px 0 var(--line), 0 40px 70px -30px rgba(58,30,42,.45); transform: rotate(-2.5deg);
+    outline: 1px solid var(--rose); outline-offset: -12px; max-width: 440px; margin-inline: auto;
+  }
+  .cert-card .academy { font-size: .78rem; letter-spacing: .14em; color: var(--taupe); }
+  .cert-card .cert-title { font-family: var(--display); font-size: 2.4rem; line-height: 1.1; margin: .6rem 0 .2rem; color: var(--plum); }
+  .cert-card .cert-name { font-family: var(--display); font-size: 1.4rem; color: var(--string-deep); border-bottom: 1px solid var(--line); display: inline-block; padding: 0 1.5rem .2rem; margin: .8rem 0 1.4rem; }
+  .cert-card .cert-foot { display: flex; justify-content: space-between; align-items: flex-end; font-size: .78rem; color: var(--taupe); }
+  .cert-card .sign { border-top: 1px solid var(--taupe); padding-top: .3rem; min-width: 7rem; }
+  .seal { width: 4.6rem; height: 4.6rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #E0587F, var(--string-deep) 60%); color: #fff; display: grid; place-items: center; font-family: var(--display); font-size: 1.3rem; box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--rose), 0 10px 20px -8px rgba(183,42,91,.6); }
+  .cert ul { margin: 0; padding-inline-start: 1.1rem; }
+  .cert li { margin-bottom: .55rem; }
+  .cert li::marker { color: var(--string); }
+
+  /* About */
+  .about { display: grid; grid-template-columns: .9fr 1.1fr; gap: 4rem; align-items: center; }
+  .about > * { min-width: 0; }
+  .about .arch { max-width: 380px; margin-inline: auto; }
+  .about .arch-inner { color: var(--taupe); font-size: .9rem; text-align: center; padding: 2rem; }
+  .hello { font-family: var(--display); font-size: 1.6rem; color: var(--string-deep); margin: 0; }
+  .about p { margin: 0 0 1rem; }
+  .pills { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+  .pills li { background: #fff; border-radius: 999px; padding: .35rem 1rem; font-size: .9rem; box-shadow: 0 1px 0 var(--line); }
+
+  /* Social proof carousel */
+  .proof-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .proof-head .section-intro { margin-bottom: 0; }
+  .car-ctrl { display: flex; align-items: center; gap: .5rem; }
+  .car-ctrl button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--taupe); background: #fff; cursor: pointer; display: grid; place-items: center; transition: background .25s, color .25s; color: var(--ink); }
+  .car-ctrl button:hover { background: var(--string-deep); color: #fff; border-color: var(--string-deep); }
+  .car-ctrl svg { width: 18px; height: 18px; }
+  .car-status { font-size: .88rem; color: var(--taupe); min-width: 4.5rem; text-align: center; }
+  .slides { list-style: none; margin: 0; padding: 0 0 1rem; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 2.2rem) / 3); gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+  .slides::-webkit-scrollbar { display: none; }
+  .slides li { scroll-snap-align: start; }
+  .placeholder { border: 1.5px dashed var(--taupe); border-radius: 18px; display: grid; place-items: center; text-align: center; color: var(--taupe); font-size: .9rem; padding: 1rem; background: rgba(255,255,255,.5); }
+  .slide-card { aspect-ratio: 4 / 5; }
+
+  /* FAQ */
+  .faq { max-width: 780px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; padding-block: 1.15rem; font-weight: 600; display: flex; justify-content: space-between; gap: 1rem; min-height: 44px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--display); font-size: 1.6rem; line-height: 1; color: var(--string); transition: transform .35s var(--ease); }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin: 0 0 1.2rem; color: var(--taupe); }
+
+  /* Signup */
+  .signup { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .signup > * { min-width: 0; }
+  .price-box { background: #fff; border-radius: 22px; padding: 1.8rem 2rem; margin-top: 1rem; box-shadow: var(--shadow); max-width: 26rem; position: relative; overflow: hidden; }
+  .price-box::before { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: var(--blush); inset-inline-start: -60px; top: -70px; }
+  .price-box > * { position: relative; }
+  .price-box .amount { font-family: var(--display); font-size: 4rem; line-height: 1; color: var(--string-deep); }
+  .price-box .amount small { font-size: 1.7rem; }
+  .price-box ul { margin: 1rem 0 0; padding-inline-start: 1.1rem; font-size: .95rem; }
+  .price-box li::marker { color: var(--string); }
+  form { background: var(--ground); border-radius: 22px; padding: 2.1rem; box-shadow: var(--shadow); }
+  .field { margin-bottom: 1.1rem; }
+  .field label, fieldset legend { display: block; font-weight: 500; font-size: .95rem; margin-bottom: .35rem; }
+  input[type=text], input[type=tel] { width: 100%; font: inherit; padding: .75rem .95rem; border: 1px solid var(--taupe); border-radius: 12px; background: #fff; color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+  input[type=text]:focus, input[type=tel]:focus { outline: none; border-color: var(--string-deep); box-shadow: 0 0 0 4px rgba(214,58,111,.15); }
+  fieldset { border: 0; padding: 0; margin: 0 0 1.1rem; }
+  .choice { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .choice label { display: flex; align-items: center; gap: .4rem; border: 1px solid var(--taupe); border-radius: 999px; padding: .45rem 1rem; cursor: pointer; font-size: .95rem; min-height: 44px; transition: all .2s; }
+  .choice label:has(input:checked) { border-color: var(--string-deep); background: #fff; color: var(--string-deep); }
+  .consent { display: flex; gap: .5rem; align-items: flex-start; font-size: .88rem; color: var(--taupe); margin-bottom: 1.4rem; }
+  .consent input { margin-top: .35rem; }
+  .form-status { margin: 1rem 0 0; font-size: .95rem; color: var(--string-deep); font-weight: 500; }
+
+  footer { padding-block: 2rem 3rem; font-size: .88rem; color: var(--taupe); display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+  footer .legal { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+  /* Mobile sticky CTA */
+  .sticky-cta { position: fixed; inset-inline: 12px; bottom: 12px; z-index: 40; display: none; align-items: center; justify-content: space-between; gap: 1rem; background: var(--plum); color: #fff; border-radius: 999px; padding: .5rem .5rem .5rem 1.2rem; padding-inline-start: 1.2rem; box-shadow: 0 16px 30px -12px rgba(58,30,42,.6); transform: translateY(150%); transition: transform .5s var(--ease); }
+  .sticky-cta.show { transform: translateY(0); }
+  .sticky-cta span { font-family: var(--display); font-size: 1.35rem; }
+
+  @media (max-width: 860px) {
+    .top nav a:not(.btn) { display: none; }
+    .hero-grid, .about, .signup, .cert, .mapping-grid { grid-template-columns: minmax(0, 1fr); }
+    .hero-grid { min-height: 0; padding-block: 1rem 3.5rem; gap: 2.5rem; }
+    .arch-wrap { max-width: 330px; }
+    .chip-1 { inset-inline-start: -.6rem; }
+    .chip-2 { inset-inline-end: -.4rem; }
+    .mapping-grid { min-height: 0; }
+    .facts-row, .tracks { grid-template-columns: 1fr; }
+    .craft { grid-template-columns: 1fr; gap: 1.8rem; }
+    .craft .frame { aspect-ratio: 4 / 3; }
+    .steps li { margin-inline-end: 0 !important; }
+    .modules { grid-template-columns: 1fr; }
+    .slides { grid-auto-columns: 78%; }
+    .section { padding-block: 4rem; }
+    form { padding: 1.4rem; }
+    .sticky-cta { display: flex; }
+    footer { padding-bottom: 6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .blob, .chip, .kicker .pulse, .marquee-track { animation: none; }
+    .slides { scroll-behavior: auto; }
+    .btn, .btn::before, .track, .facts-row li, .sticky-cta { transition: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+<div class="draft-bar">טיוטה לעיון (גרסה 3). התמונות הן תמונות המחשה ממאגר חינמי ויוחלפו בתמונות של מעיין. כל מה שמסומן בצהוב צריך אישור שלה.</div>
+
+<header class="site-head" id="site-head">
+  <div class="wrap top">
+    <a class="brand" href="./">מעיין אוחיון<small>Maayan Ohayon Academy · אשדוד</small></a>
+    <nav aria-label="ניווט ראשי">
+      <a href="#method">השיטה</a>
+      <a href="#course">מה לומדים</a>
+      <a href="#about">על מעיין</a>
+      <a href="#faq">שאלות</a>
+      <a class="btn btn-small" href="#signup">להרשמה מוקדמת</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="blob blob-1"></div><div class="blob blob-2"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker"><span class="pulse" aria-hidden="true"></span>קורס דיגיטלי · ההרשמה המוקדמת פתוחה</p>
+        <h1 id="hero-title">
+          <span class="w"><span>גבה</span></span> <span class="w"><span>מדויקת</span></span> <span class="w"><span>מתחילה</span></span>
+          <span class="w"><span>ב<em>שלושה</em></span></span> <span class="w"><span><em>קווים</em>.</span></span>
+        </h1>
+        <p class="lede" data-reveal>מעיין אוחיון, מדריכה מוסמכת מטעם InLei®, מלמדת את השיטה שלה: למפות, לעצב ולסדר גבות שמתאימות לפנים, לעצמך או ללקוחות.</p>
+        <div class="hero-cta" data-reveal>
+          <a class="btn" href="#signup">לשריון מקום <span class="arrow" aria-hidden="true">←</span></a>
+          <p><strong class="price-inline">299 ₪</strong> · בלי צורך בניסיון קודם</p>
+        </div>
+      </div>
+
+      <div class="arch-wrap" data-reveal>
+        <div class="arch has-photo">
+          <div class="arch-inner" id="arch-parallax">
+            <img class="photo" id="hero-photo" src="img/p29588096.jpg" alt="קוסמטיקאית מעצבת גבות ללקוחה בסטודיו" width="1400" height="933" fetchpriority="high">
+          </div>
+          <span class="credit">תמונת המחשה · תוחלף בתמונה של מעיין</span>
+        </div>
+        <div class="chip chip-1"><strong>InLei®</strong>מדריכה מוסמכת</div>
+        <div class="chip chip-2"><strong>299 ₪</strong>לקורס המלא</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" dir="ltr">
+      <span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span><span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span>
+      <span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span><span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span>
+    </div>
+  </div>
+
+  <section class="mapping" id="method" aria-labelledby="method-title">
+    <div class="wrap mapping-grid">
+      <div>
+        <p class="eyebrow">טעימה מהשיעור הראשון</p>
+        <h2 id="method-title">שלושה קווים מכנף האף</h2>
+        <p class="section-intro">ככה מודדים גבה לפני שנוגעים בפינצטה. גללי למטה וראי איך זה עובד.</p>
+        <ol class="steps-list">
+          <li class="step"><span class="n">1</span><div><h3>תחילת הגבה</h3><p>קו ישר כלפי מעלה מהקצה החיצוני של כנף האף.</p></div></li>
+          <li class="step"><span class="n">2</span><div><h3>שיא הקשת</h3><p>קו מכנף האף שעובר דרך מרכז האישון.</p></div></li>
+          <li class="step"><span class="n">3</span><div><h3>סוף הגבה</h3><p>קו מכנף האף שעובר בזווית העין החיצונית.</p></div></li>
+        </ol>
+      </div>
+      <figure class="mapping-figure photo-map" style="margin:0">
+        <img class="photo" src="img/p3373735.jpg" alt="" width="1400" height="934" loading="lazy">
+        <span class="credit">תמונת המחשה</span>
+        <svg viewBox="0 0 1400 934" role="img" aria-labelledby="map-title">
+          <title id="map-title">שלושה קווי מיפוי על תמונה של גבה אמיתית: תחילת הגבה, שיא הקשת וסוף הגבה</title>
+          <path class="map-line" id="l1" pathLength="1" d="M278 934 L153 200"/>
+          <path class="map-line" id="l2" pathLength="1" d="M552 934 L735 110"/>
+          <path class="map-line" id="l3" pathLength="1" d="M764 934 L1101 290"/>
+          <g id="m1"><circle class="dot" cx="168" cy="290" r="12"/><text class="label" x="175" y="175">תחילת הגבה</text></g>
+          <g id="m2"><circle class="dot" cx="720" cy="180" r="12"/><text class="label" x="740" y="85">שיא הקשת</text></g>
+          <g id="m3"><circle class="dot" cx="1070" cy="350" r="12"/><text class="label" x="1150" y="268">סוף הגבה</text></g>
+          <text class="meet" x="520" y="900">↓ שלושת הקווים נפגשים בכנף האף</text>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="craft-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>מה תתרגלי</p>
+      <h2 id="craft-title" data-reveal>שלושה שלבים בכל סידור</h2>
+      <p class="section-intro" data-reveal>כל שלב מצולם מקרוב, כך שרואים בדיוק איפה היד עובדת.</p>
+      <div class="craft">
+        <figure>
+          <div class="frame"><img class="photo" src="img/p5177990.jpg" alt="קוסמטיקאית מודדת גבה בעזרת עיפרון" width="1400" height="933" loading="lazy" style="object-position: 55% 30%"><span class="credit">תמונת המחשה</span></div>
+          <figcaption><strong>מדידה</strong><span>מיפוי עם עיפרון לפני שנוגעים בשערה.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><img class="photo" src="img/p8558247.jpg" alt="סימון קו הגבה בעיפרון ומברשת" width="1400" height="933" loading="lazy" style="object-position: 60% 30%"><span class="credit">תמונת המחשה</span></div>
+          <figcaption><strong>סימון</strong><span>מסמנים את הצורה שנבחרה על הפנים.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><img class="photo" src="img/p5177994.jpg" alt="הסרת שערות עודפות בפינצטה" width="1400" height="933" loading="lazy" style="object-position: 70% 30%"><span class="credit">תמונת המחשה</span></div>
+          <figcaption><strong>הסרה</strong><span>מסירים רק את מה שמחוץ לקווים.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="facts-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>הקורס בקצרה</p>
+      <h2 id="facts-title" data-reveal>שיעורי וידאו, בקצב שלך</h2>
+      <p class="section-intro" data-reveal>הדגמות מצולמות על מודל אמיתי. אפשר לעצור, לחזור ולצפות שוב.</p>
+      <ul class="facts-row" data-stagger>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg><div><strong><span class="todo">X שיעורים</span></strong><span>צפייה בקצב שלך, כמה פעמים שצריך</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><div><strong>מחשב, טאבלט או טלפון</strong><span>בלי להתקין שום דבר</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><strong><span class="todo">גישה ל-X חודשים</span></strong><span>כולל עדכונים שיתווספו</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-blush" aria-labelledby="tracks-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>שני מסלולים</p>
+      <h2 id="tracks-title" data-reveal>אותה שיטה, שתי מטרות</h2>
+      <p class="section-intro" data-reveal>השיעורים משותפים. בהרשמה בוחרים מסלול, וההבדל הוא מה מקבלים בסוף.</p>
+      <div class="tracks" data-stagger>
+        <div class="track">
+          <span class="track-tag">לעצמך</span>
+          <h3>להפסיק לנחש מול המראה</h3>
+          <ul><li>למצוא את הצורה שמתאימה לפנים שלך</li><li>לסדר בבית בלי לקצר יותר מדי</li><li>לגדל מחדש גבות שנפגעו</li></ul>
+        </div>
+        <div class="track track-pro">
+          <span class="track-tag">כמקצוע</span>
+          <h3>לקבל לקוחות ראשונות</h3>
+          <ul><li>ייעוץ ללקוחה והתאמת צורה</li><li>היגיינה, סטריליזציה ובדיקת רגישות</li><li>תמחור טיפול ובניית קהל ראשון</li><li>תעודת סיום מטעם האקדמיה</li></ul>
+        </div>
+      </div>
+      <div class="cta-row"><a class="btn" href="#signup">לשריון מקום <span class="arrow" aria-hidden="true">←</span></a></div>
+    </div>
+  </section>
+
+  <section class="section section-plum" aria-labelledby="why-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>למה דיגיטלי</p>
+      <h2 id="why-title" data-reveal>כל היתרונות של קורס, בלי להגיע לאשדוד</h2>
+      <p class="section-intro" data-reveal>אותו חומר כמו בקורס שמעיין מעבירה, בזמן שנוח לך.</p>
+      <ol class="steps">
+        <li><strong>לומדת בקצב שלך</strong> מתי שנוח, גם בלילה אחרי שהילדים נרדמו</li>
+        <li><strong>צופה שוב</strong> בכל הדגמה, עד שהיד זוכרת</li>
+        <li><strong>בלי נסיעות</strong> ובלי לתאם ימי חופש</li>
+        <li><strong>ממשיכה לעבוד</strong> בזמן שאת לומדת</li>
+        <li><strong>299 ₪</strong> לקורס שלם</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="course" aria-labelledby="course-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>הסילבוס</p>
+      <h2 id="course-title" data-reveal>מה לומדים, לפי הסדר</h2>
+      <p class="section-intro" data-reveal><span class="todo">סדר השיעורים הוא הצעה ראשונית. מעיין צריכה לאשר או לשנות.</span></p>
+      <ol class="modules" data-stagger>
+        <li><div><h3>כלים והיגיינה</h3><p>פינצטה, מספריים, מברשת, ועבודה סטרילית.</p></div></li>
+        <li><div><h3>מיפוי גבה</h3><p>שלושת הקווים, ואיך מודדים על כל פנים.</p></div></li>
+        <li><div><h3>התאמת צורה למבנה הפנים</h3><p>למה אותה גבה נראית אחרת על פנים שונות.</p></div></li>
+        <li><div><h3>טכניקות הסרה</h3><p><span class="todo">פינצטה / שעווה / חוט (לפי מה שמעיין עובדת איתו)</span></p></div></li>
+        <li><div><h3>צביעה</h3><p><span class="todo">חינה או צבע (לאשר אם זה חלק מהקורס)</span></p></div></li>
+        <li><div><h3>גבות דלילות ותיקונים</h3><p>מה עושים אחרי סידור שהשתבש.</p></div></li>
+        <li><div><h3>הלקוחה הראשונה</h3><p>ייעוץ, רגישויות, תמחור ותיעוד לפני/אחרי. במסלול המקצועי.</p></div></li>
+      </ol>
+      <div class="cta-row"><a class="btn" href="#signup">לשריון מקום <span class="arrow" aria-hidden="true">←</span></a></div>
+    </div>
+  </section>
+
+  <section class="section cert-section" aria-labelledby="cert-title">
+    <img class="photo bg" id="cert-bg" src="img/p18809795.jpg" alt="" width="1400" height="933" loading="lazy" style="object-position: 20% 40%">
+    <div class="wrap cert">
+      <div class="cert-card" id="cert-card" aria-hidden="true">
+        <div class="academy">MAAYAN OHAYON ACADEMY</div>
+        <div class="cert-title">תעודת סיום</div>
+        <div>קורס דיגיטלי לעיצוב וסידור גבות</div>
+        <div class="cert-name">שם הבוגרת</div>
+        <div class="cert-foot"><div class="sign">מעיין אוחיון</div><div class="seal">M.O</div></div>
+      </div>
+      <div>
+        <p class="eyebrow" data-reveal>בסוף הקורס</p>
+        <h2 id="cert-title" data-reveal>תעודה וליווי</h2>
+        <ul data-stagger>
+          <li><span class="todo">תעודת סיום מטעם האקדמיה (לאשר מה בדיוק היא מאשרת)</span></li>
+          <li><span class="todo">מענה לשאלות בוואטסאפ לאורך הקורס (לאשר זמינות)</span></li>
+          <li><span class="todo">משוב של מעיין על תמונות העבודה שלך (לאשר)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div class="arch" data-reveal><div class="arch-inner">תמונה של מעיין<br>(אמיתית, מהצילומים שלה)</div></div>
+      <div>
+        <p class="hello" data-reveal>היי, אני מעיין</p>
+        <h2 id="about-title" data-reveal>על מעיין</h2>
+        <p data-reveal>מעיין מנהלת באשדוד אקדמיה להרמת ריסים וגבות, והיא מדריכה מוסמכת מטעם InLei®. <span class="todo">כבר X שנים</span> היא מכשירה נשים <span class="todo">בקורסים פרונטליים</span> ומטפלת בלקוחות קבועות.</p>
+        <p data-reveal><span class="todo">פסקה בגוף ראשון, בשפה של מעיין: איך התחילה, ומה חשוב לה כשהיא מלמדת.</span></p>
+        <ul class="pills" data-stagger>
+          <li>מדריכה מוסמכת InLei®</li>
+          <li>אשדוד</li>
+          <li><a href="https://www.instagram.com/maayan_ohayon_academy/" dir="ltr">@maayan_ohayon_academy</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-blush" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="proof-head">
+        <div>
+          <p class="eyebrow" data-reveal>עבודות ובוגרות</p>
+          <h2 id="work-title" data-reveal>מה אומרות עליה</h2>
+          <p class="section-intro" data-reveal>רק תמונות וציטוטים אמיתיים, באישור הלקוחות.</p>
+        </div>
+        <div class="car-ctrl">
+          <button type="button" id="car-prev" aria-label="הקודם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          <span class="car-status" id="car-status" aria-live="polite">1 מתוך 5</span>
+          <button type="button" id="car-next" aria-label="הבא"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+        </div>
+      </div>
+      <ul class="slides" id="slides" tabindex="0" aria-label="עבודות והמלצות">
+        <li><div class="placeholder slide-card">לפני / אחרי</div></li>
+        <li><div class="placeholder slide-card">צילום מסך מההיילייט "אתן כתבתן"</div></li>
+        <li><div class="placeholder slide-card">לפני / אחרי</div></li>
+        <li><div class="placeholder slide-card">צילום מסך מההיילייט "אתן כתבתן"</div></li>
+        <li><div class="placeholder slide-card">לפני / אחרי</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <h2 id="faq-title" data-reveal>שאלות</h2>
+      <div data-stagger>
+        <details><summary>צריך ניסיון קודם?</summary><p>לא. הקורס מתחיל מהכלים ומהמיפוי.</p></details>
+        <details><summary>כמה זמן יש גישה לשיעורים?</summary><p><span class="todo">לקבוע: חצי שנה, שנה או לתמיד</span></p></details>
+        <details><summary>ערכת כלים כלולה?</summary><p><span class="todo">לקבוע: כלולה, בתוספת תשלום, או רשימת קנייה עם קוד הנחה</span></p></details>
+        <details><summary>אפשר לשאול את מעיין שאלות?</summary><p><span class="todo">לקבוע: וואטסאפ, מפגש זום חודשי, או בלי</span></p></details>
+        <details><summary>מה המחיר?</summary><p>299 ₪ לקורס המלא, לשני המסלולים. <span class="todo">תשלום אחד או בתשלומים (לאשר)</span></p></details>
+        <details><summary>הקורס כולל הרמת גבות או ריסים?</summary><p>לא. הקורס הזה מתמקד בעיצוב וסידור גבות. על הרמת ריסים וגבות יש קורס נפרד באקדמיה.</p></details>
+        <details><summary>אפשר לבטל?</summary><p><span class="todo">מדיניות ביטול לפי חוק הגנת הצרכן (לנסח לפני שמתחילים לגבות כסף)</span></p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-blush" id="signup" aria-labelledby="signup-title">
+    <div class="wrap signup">
+      <div>
+        <p class="eyebrow" data-reveal>הרשמה מוקדמת</p>
+        <h2 id="signup-title" data-reveal>שריינו לי מקום</h2>
+        <p class="section-intro" data-reveal>משאירים פרטים, בלי תשלום עכשיו. נרשמות מוקדמות מקבלות הודעה ראשונות כשהקורס נפתח.</p>
+        <div class="price-box" data-reveal>
+          <div class="amount">299 <small>₪</small></div>
+          <ul><li>כל שיעורי הקורס</li><li>לשימוש עצמי או כמקצוע</li><li>תעודת סיום מטעם האקדמיה</li></ul>
+        </div>
+      </div>
+      <form id="signup-form" novalidate data-reveal>
+        <div class="field"><label for="name">שם</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="phone">טלפון</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required></div>
+        <fieldset>
+          <legend>הקורס בשבילך</legend>
+          <div class="choice">
+            <label><input type="radio" name="track" value="self" required> לעצמי</label>
+            <label><input type="radio" name="track" value="pro"> כמקצוע</label>
+            <label><input type="radio" name="track" value="unsure"> עוד לא יודעת</label>
+          </div>
+        </fieldset>
+        <label class="consent"><input type="checkbox" name="consent" required> אני מאשרת לקבל ממעיין עדכונים על הקורס בוואטסאפ ובמייל. אפשר להסיר את עצמי בכל שלב.</label>
+        <button class="btn" type="submit">לשריון מקום <span class="arrow" aria-hidden="true">←</span></button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>© Maayan Ohayon Academy</span>
+    <div class="legal"><span class="todo">הצהרת נגישות</span><span class="todo">תקנון</span><span class="todo">מדיניות פרטיות</span></div>
+  </footer>
+</div>
+
+<div class="sticky-cta" id="sticky-cta"><span>299 ₪</span><a class="btn btn-small" href="#signup">לשריון מקום</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  var motion = document.documentElement.classList.contains('js-motion');
+
+  /* Brow hairs: deterministic strokes that follow real growth direction —
+     upright at the head, sweeping toward the tail along the body. */
+  var top = [[395,194],[340,182],[290,168],[248,161],[200,170],[150,186],[112,203]];
+  var bot = [[396,224],[340,208],[290,198],[250,192],[200,193],[150,197],[112,203]];
+  function lerpY(pts, x) {
+    for (var i = 0; i < pts.length - 1; i++) {
+      var a = pts[i], b = pts[i + 1];
+      if (x <= a[0] && x >= b[0]) { var t = (a[0] - x) / (a[0] - b[0]); return a[1] + (b[1] - a[1]) * t; }
+    }
+    return pts[pts.length - 1][1];
+  }
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  var NS = 'http://www.w3.org/2000/svg';
+  var hairs = [];
+  for (var k = 0; k < 420; k++) {
+    var u = Math.pow(rnd(), 0.9);
+    var x = 392 - u * 272;
+    var yt = lerpY(top, x), yb = lerpY(bot, x);
+    var depth = 0.3 + rnd() * 0.65;               // start in the lower part so hairs stay inside the shape
+    var y = yt + (yb - yt) * depth;
+    var ang = u < 0.15 ? 78 - (u / 0.15) * 40 : u < 0.6 ? 38 - ((u - 0.15) / 0.45) * 26 : 12 - ((u - 0.6) / 0.4) * 22;
+    ang += (rnd() - 0.5) * 7;
+    var room = (y - yt) + 3;                       // don't grow far past the upper edge
+    var len = Math.min((u < 0.15 ? 7 : 10) + rnd() * 5, room / Math.max(Math.sin(Math.abs(ang) * Math.PI / 180), 0.35));
+    var r = ang * Math.PI / 180;
+    var shade = u < 0.12 ? '#9A8074' : u < 0.7 ? (rnd() < 0.5 ? '#4A3830' : '#5A463D') : '#6E5A50';
+    var bend = 0.12 * len;
+    hairs.push({ d: 'M' + x.toFixed(1) + ' ' + y.toFixed(1) + ' q ' + (-Math.cos(r) * len * 0.5 - bend * 0.3).toFixed(1) + ' ' + (-Math.sin(r) * len * 0.5 - bend * 0.2).toFixed(1) + ' ' + (-Math.cos(r) * len).toFixed(1) + ' ' + (-Math.sin(r) * len).toFixed(1),
+                 c: shade, o: (u < 0.12 ? 0.4 : 0.55) + rnd() * 0.25, w: 0.6 + rnd() * 0.5 });
+  }
+  document.querySelectorAll('g.hairs').forEach(function (g) {
+    hairs.forEach(function (h) {
+      var p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', h.d); p.setAttribute('stroke', h.c); p.setAttribute('stroke-opacity', h.o.toFixed(2));
+      p.setAttribute('stroke-width', h.w.toFixed(2)); p.setAttribute('fill', 'none'); p.setAttribute('stroke-linecap', 'round');
+      g.appendChild(p);
+    });
+  });
+
+  /* Header condenses after scrolling */
+  var head = document.getElementById('site-head');
+  function onScroll() { head.classList.toggle('scrolled', window.scrollY > 12); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* Mobile sticky CTA: visible between the hero and the signup form */
+  var sticky = document.getElementById('sticky-cta');
+  var heroVisible = true, signupVisible = false;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.target.classList.contains('hero')) heroVisible = e.isIntersecting;
+      if (e.target.id === 'signup') signupVisible = e.isIntersecting;
+    });
+    sticky.classList.toggle('show', !heroVisible && !signupVisible);
+  });
+  io.observe(document.querySelector('.hero')); io.observe(document.getElementById('signup'));
+
+  /* Carousel: buttons + keyboard scroll, status announced */
+  var slides = document.getElementById('slides'), status = document.getElementById('car-status');
+  var count = slides.children.length;
+  function step() { var li = slides.children[0]; return li.getBoundingClientRect().width + parseFloat(getComputedStyle(slides).columnGap || 0); }
+  function updateStatus() { var i = Math.round(Math.abs(slides.scrollLeft) / step()) + 1; status.textContent = Math.min(i, count) + ' מתוך ' + count; }
+  document.getElementById('car-next').addEventListener('click', function () { slides.scrollBy({ left: -step() }); });
+  document.getElementById('car-prev').addEventListener('click', function () { slides.scrollBy({ left: step() }); });
+  slides.addEventListener('scroll', function () { clearTimeout(slides._t); slides._t = setTimeout(updateStatus, 80); }, { passive: true });
+
+  document.getElementById('signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('form-status').textContent = 'זו טיוטה, והטופס עוד לא מחובר. פרטים לא נשמרו.';
+  });
+
+  if (!motion || !window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+  var ease = 'expo.out';
+
+  /* Hero: words rise out of their line boxes */
+  gsap.to('h1 .w > span', { y: 0, duration: 1.1, ease: ease, stagger: 0.08, delay: 0.15 });
+  gsap.to('.hero [data-reveal]', { opacity: 1, duration: 1, ease: ease, stagger: 0.12, delay: 0.55 });
+  gsap.fromTo('.hero .arch', { scale: 0.94 }, { scale: 1, duration: 1.4, ease: ease, delay: 0.3 });
+  /* Slow push-in on the hero photo, like a camera move */
+  gsap.fromTo('#hero-photo', { scale: 1.14 }, { scale: 1, duration: 9, ease: 'power1.out' });
+  /* Craft photos wipe up into view, then drift slightly while scrolling */
+  gsap.to('.craft .frame', { clipPath: 'inset(0% 0 0 0 round 22px)', duration: 1.2, ease: 'expo.inOut', stagger: 0.15, scrollTrigger: { trigger: '.craft', start: 'top 80%', once: true } });
+  gsap.fromTo('#cert-bg', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.cert-section', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.to('#arch-parallax', { yPercent: -7, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* Generic reveals */
+  gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+    if (el.closest('.hero')) return;
+    gsap.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: ease, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+  });
+  gsap.utils.toArray('[data-stagger]').forEach(function (group) {
+    gsap.fromTo(group.children, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: ease, stagger: 0.08, scrollTrigger: { trigger: group, start: 'top 85%', once: true } });
+  });
+
+  /* Why-digital bars unroll from the reading start (right edge) */
+  gsap.to('.steps li', { clipPath: 'inset(0 0 0 0%)', duration: 1, ease: ease, stagger: 0.12, scrollTrigger: { trigger: '.steps', start: 'top 80%', once: true } });
+
+  /* Certificate settles into place while scrolling */
+  gsap.fromTo('#cert-card', { rotation: -14, y: 80, opacity: 0 }, { rotation: -2.5, y: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.cert', start: 'top 85%', end: 'top 35%', scrub: 0.6 } });
+
+  /* The method lesson: pinned on desktop, lines draw as you scroll */
+  var stepsEls = gsap.utils.toArray('.step');
+  function buildMapping(tl) {
+    gsap.set(['#l1', '#l2', '#l3'], { strokeDashoffset: 1 });
+    gsap.set(['#m1', '#m2', '#m3'], { opacity: 0 });
+    ['#l1', '#l2', '#l3'].forEach(function (line, i) {
+      var at = i === 0 ? 0 : '>+0.35';
+      tl.to(stepsEls[i], { opacity: 1, duration: 0.3 }, at);
+      if (i > 0) tl.to(stepsEls[i - 1], { opacity: 0.45, duration: 0.3 }, '<');
+      tl.to(line, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' }, '<')
+        .to('#m' + (i + 1), { opacity: 1, duration: 0.3 }, '>-0.15');
+    });
+    tl.to({}, { duration: 0.4 });
+  }
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 861px)', function () {
+    var tl = gsap.timeline({ scrollTrigger: { trigger: '.mapping', start: 'top top', end: '+=1500', pin: true, scrub: 0.7 } });
+    buildMapping(tl);
+  });
+  mm.add('(max-width: 860px)', function () {
+    var tl = gsap.timeline({ scrollTrigger: { trigger: '.mapping-figure', start: 'top 75%', once: true } });
+    buildMapping(tl);
+  });
+})();
+</script>
+</body>
+</html>
