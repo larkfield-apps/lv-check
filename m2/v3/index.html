@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>מעיין אוחיון · קורס סידור גבות</title>
+<title>מעיין אוחיון · קורס דיגיטלי לעיצוב ושיקום גבות טבעיות</title>
 <script>
   // Motion is opt-in: only hide reveal targets when motion is allowed and JS runs.
   (function () {
@@ -17,21 +17,26 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ground: #FBF5F4;
-    --blush: #F2DEDA;
-    --ink: #2A1F1C;
-    --taupe: #7A665C;
-    --string: #D63A6F;
-    --string-deep: #B72A5B;
-    --line: #E6D2CD;
-    --plum: #3A1E2A;
-    --plum-2: #6B2E47;
-    --rose: #D98BA6;
-    --shadow: 0 1px 2px rgba(58,30,42,.06), 0 18px 40px -18px rgba(58,30,42,.28);
+    /* Antique luxury: baby-pink powder, ivory, dusty rose, wine, aged gold */
+    --ground: #FAF4F0;
+    --blush: #F2DCD7;
+    --baby: #EDCFCB;
+    --ink: #3B2A2A;
+    --taupe: #7D6862;
+    --string: #BD6477;
+    --string-deep: #8E4A5A;
+    --line: #E8D6D0;
+    --plum: #4A2E35;
+    --plum-2: #6E4450;
+    --rose: #D4A5AE;
+    --gold: #B08D5B;
+    --gold-soft: #D8C29E;
+    --shadow: 0 1px 2px rgba(74,46,53,.06), 0 18px 40px -18px rgba(74,46,53,.28);
     --display: "Bellefair", "Times New Roman", serif;
+    --latin: "Cormorant Garamond", "Bellefair", Georgia, serif;
     --body: "IBM Plex Sans Hebrew", "Segoe UI", Arial, sans-serif;
     --ease: cubic-bezier(.16,1,.3,1);
   }
@@ -58,7 +63,7 @@
   .site-head.scrolled { background: rgba(251,245,244,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
   .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; }
   .brand { font-family: var(--display); font-size: 1.6rem; line-height: 1; text-decoration: none; }
-  .brand small { display: block; font-family: var(--body); font-size: .75rem; color: var(--taupe); letter-spacing: .02em; margin-top: .3rem; }
+  .brand small { display: block; font-family: var(--latin); font-style: italic; font-size: .92rem; color: var(--gold); letter-spacing: .02em; margin-top: .25rem; }
   .top nav { display: flex; gap: 1.4rem; align-items: center; font-size: .95rem; }
   .top nav a:not(.btn) { text-decoration: none; color: var(--taupe); position: relative; }
   .top nav a:not(.btn)::after { content: ""; position: absolute; inset-inline: 0; bottom: -2px; height: 1px; background: var(--string); transform: scaleX(0); transition: transform .35s var(--ease); }
@@ -68,8 +73,8 @@
   .btn {
     display: inline-flex; align-items: center; gap: .6rem; background: var(--string-deep); color: #fff; text-decoration: none;
     font-weight: 600; font-size: 1rem; border: 0; cursor: pointer; min-height: 44px;
-    padding: .85rem 1.7rem; border-radius: 999px; position: relative; overflow: hidden; isolation: isolate;
-    box-shadow: 0 10px 24px -12px rgba(183,42,91,.7); transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    padding: .85rem 1.8rem; border-radius: 3px; letter-spacing: .02em; position: relative; overflow: hidden; isolation: isolate;
+    box-shadow: 0 10px 24px -14px rgba(74,46,53,.7); transition: transform .3s var(--ease), box-shadow .3s var(--ease);
   }
   .btn::before { content: ""; position: absolute; inset: 0; background: var(--plum); border-radius: inherit; transform: translateY(101%); transition: transform .45s var(--ease); z-index: -1; }
   .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(58,30,42,.7); }
@@ -84,14 +89,21 @@
   .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; min-height: min(760px, calc(100svh - 110px)); padding-block: 2rem 4rem; }
   .hero-grid > * { min-width: 0; }
   .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; z-index: -1; pointer-events: none; }
-  .blob-1 { width: 420px; height: 420px; background: #F4C6D4; inset-inline-end: -120px; top: 40px; animation: drift 16s ease-in-out infinite alternate; }
+  .hero { background: radial-gradient(90% 70% at 20% 40%, #F1D3D0 0%, rgba(241,211,208,0) 70%), linear-gradient(180deg, #F6E6E2, var(--ground)); }
+  .blob-1 { width: 420px; height: 420px; background: #EDC9C6; inset-inline-end: -120px; top: 40px; animation: drift 16s ease-in-out infinite alternate; }
   .blob-2 { width: 320px; height: 320px; background: #F7E1D6; inset-inline-start: 5%; bottom: -60px; animation: drift 20s ease-in-out infinite alternate-reverse; }
   @keyframes drift { to { transform: translate(40px, -30px) scale(1.08); } }
 
-  .kicker { display: inline-flex; align-items: center; gap: .55rem; font-size: .88rem; font-weight: 500; color: var(--string-deep); background: #fff; border: 1px solid var(--line); padding: .3rem .85rem; border-radius: 999px; margin: 0 0 1.4rem; }
-  .kicker .pulse { width: .5rem; height: .5rem; border-radius: 50%; background: var(--string); box-shadow: 0 0 0 0 rgba(214,58,111,.5); animation: pulse 2s infinite; }
+  .kicker { display: flex; align-items: center; gap: .8rem; font-size: .9rem; font-weight: 500; color: var(--string-deep); margin: 0 0 1.4rem; letter-spacing: .04em; }
+  .kicker::before, .kicker::after { content: ""; height: 1px; width: 2.4rem; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .kicker::after { background: linear-gradient(90deg, var(--gold), transparent); }
+  .kicker .gem { width: .42rem; height: .42rem; background: var(--gold); transform: rotate(45deg); flex: none; }
   @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(214,58,111,0); } 100% { box-shadow: 0 0 0 0 rgba(214,58,111,0); } }
-  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 6.6vw, 5.8rem); line-height: 1; margin: 0 0 1.5rem; letter-spacing: -.01em; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.8rem, 5.9vw, 5.2rem); line-height: 1.02; margin: 0 0 1.5rem; letter-spacing: -.01em; }
+  h1 .h1-small { display: block; font-size: .42em; letter-spacing: .06em; color: var(--taupe); margin-bottom: .35em; }
+  h1 .h1-small .w { padding-bottom: .15em; }
+  h1 .keep { white-space: nowrap; }
+  .btn-small { white-space: nowrap; }
   h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .1em; margin-bottom: -.1em; }
   h1 .w > span { display: inline-block; }
   h1 em { font-style: normal; color: var(--string-deep); }
@@ -103,6 +115,10 @@
 
   /* The arch: a portrait frame shaped like a brow arch */
   .arch-wrap { position: relative; max-width: 440px; margin-inline: auto; width: 100%; }
+  /* Gilded double frame around the arch */
+  .arch-wrap::before, .arch-wrap::after { content: ""; position: absolute; pointer-events: none; border: 1px solid var(--gold); border-radius: 999px 999px 34px 34px; z-index: 2; }
+  .arch-wrap::before { inset: -14px; opacity: .75; }
+  .arch-wrap::after { inset: -22px; opacity: .35; }
   .arch {
     position: relative; aspect-ratio: 4 / 5; max-width: 100%; border-radius: 999px 999px 28px 28px; overflow: hidden;
     background: radial-gradient(120% 80% at 50% 30%, #FFF7F5 0%, #F6DAD9 55%, #E9B9C4 100%);
@@ -116,9 +132,10 @@
   }
   .arch-note { position: absolute; inset-inline: 0; bottom: 1rem; text-align: center; font-size: .78rem; z-index: 2; }
   .chip {
-    position: absolute; z-index: 3; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border-radius: 16px; padding: .6rem .95rem; box-shadow: var(--shadow); font-size: .85rem; line-height: 1.35;
-    animation: float 6s ease-in-out infinite alternate;
+    position: absolute; z-index: 3; background: rgba(250,244,240,.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-radius: 2px; padding: .65rem 1rem; box-shadow: var(--shadow); font-size: .85rem; line-height: 1.35;
+    outline: 1px solid var(--gold-soft); outline-offset: -5px;
+    animation: float 7s ease-in-out infinite alternate;
   }
   .chip strong { display: block; font-size: 1rem; }
   .chip-1 { inset-inline-start: -2.2rem; top: 18%; }
@@ -158,7 +175,7 @@
   .cert-section li::marker { color: var(--rose); }
 
   /* Marquee */
-  .marquee { background: var(--string-deep); color: #fff; overflow: hidden; padding-block: .75rem; }
+  .marquee { background: var(--plum); color: var(--gold-soft); overflow: hidden; padding-block: .75rem; border-block: 1px solid var(--gold); }
   .marquee-track { display: flex; width: max-content; animation: slide 38s linear infinite; }
   .marquee-track span { font-family: var(--display); font-size: 1.35rem; white-space: nowrap; padding-inline: 1.4rem; }
   .marquee-track span::after { content: "✦"; font-size: .8rem; margin-inline-start: 2.8rem; opacity: .7; vertical-align: middle; }
@@ -296,7 +313,7 @@
   .field { margin-bottom: 1.1rem; }
   .field label, fieldset legend { display: block; font-weight: 500; font-size: .95rem; margin-bottom: .35rem; }
   input[type=text], input[type=tel] { width: 100%; font: inherit; padding: .75rem .95rem; border: 1px solid var(--taupe); border-radius: 12px; background: #fff; color: var(--ink); transition: border-color .2s, box-shadow .2s; }
-  input[type=text]:focus, input[type=tel]:focus { outline: none; border-color: var(--string-deep); box-shadow: 0 0 0 4px rgba(214,58,111,.15); }
+  input[type=text]:focus, input[type=tel]:focus { outline: none; border-color: var(--string-deep); box-shadow: 0 0 0 4px rgba(142,74,90,.15); }
   fieldset { border: 0; padding: 0; margin: 0 0 1.1rem; }
   .choice { display: flex; gap: .5rem; flex-wrap: wrap; }
   .choice label { display: flex; align-items: center; gap: .4rem; border: 1px solid var(--taupe); border-radius: 999px; padding: .45rem 1rem; cursor: pointer; font-size: .95rem; min-height: 44px; transition: all .2s; }
@@ -315,6 +332,7 @@
 
   @media (max-width: 860px) {
     .top nav a:not(.btn) { display: none; }
+    .brand small { font-size: .8rem; white-space: nowrap; }
     .hero-grid, .about, .signup, .cert, .mapping-grid { grid-template-columns: minmax(0, 1fr); }
     .hero-grid { min-height: 0; padding-block: 1rem 3.5rem; gap: 2.5rem; }
     .arch-wrap { max-width: 330px; }
@@ -361,12 +379,13 @@
     <div class="blob blob-1"></div><div class="blob blob-2"></div>
     <div class="wrap hero-grid">
       <div>
-        <p class="kicker"><span class="pulse" aria-hidden="true"></span>קורס דיגיטלי · ההרשמה המוקדמת פתוחה</p>
+        <p class="kicker"><span class="gem" aria-hidden="true"></span>ההרשמה המוקדמת פתוחה</p>
         <h1 id="hero-title">
-          <span class="w"><span>גבה</span></span> <span class="w"><span>מדויקת</span></span> <span class="w"><span>מתחילה</span></span>
-          <span class="w"><span>ב<em>שלושה</em></span></span> <span class="w"><span><em>קווים</em>.</span></span>
+          <span class="h1-small"><span class="w"><span>קורס</span></span> <span class="w"><span>דיגיטלי</span></span></span>
+          <span class="w"><span>לעיצוב</span></span> <span class="w"><span>ושיקום</span></span>
+          <span class="keep"><span class="w"><span><em>גבות</em></span></span> <span class="w"><span><em>טבעיות</em></span></span></span>
         </h1>
-        <p class="lede" data-reveal>מעיין אוחיון, מדריכה מוסמכת מטעם InLei®, מלמדת את השיטה שלה: למפות, לעצב ולסדר גבות שמתאימות לפנים, לעצמך או ללקוחות.</p>
+        <p class="lede" data-reveal>מעיין אוחיון, מדריכה מוסמכת מטעם InLei®, מלמדת את השיטה שלה: למפות, לעצב ולשקם גבות שמתאימות לפנים, לעצמך או ללקוחות.</p>
         <div class="hero-cta" data-reveal>
           <a class="btn" href="#signup">לשריון מקום <span class="arrow" aria-hidden="true">←</span></a>
           <p><strong class="price-inline">299 ₪</strong> · בלי צורך בניסיון קודם</p>
@@ -504,7 +523,7 @@
         <li><div><h3>התאמת צורה למבנה הפנים</h3><p>למה אותה גבה נראית אחרת על פנים שונות.</p></div></li>
         <li><div><h3>טכניקות הסרה</h3><p><span class="todo">פינצטה / שעווה / חוט (לפי מה שמעיין עובדת איתו)</span></p></div></li>
         <li><div><h3>צביעה</h3><p><span class="todo">חינה או צבע (לאשר אם זה חלק מהקורס)</span></p></div></li>
-        <li><div><h3>גבות דלילות ותיקונים</h3><p>מה עושים אחרי סידור שהשתבש.</p></div></li>
+        <li><div><h3>שיקום גבות</h3><p>גבות דלילות, גבות שנפגעו מסידור יתר, ואיך מגדלים אותן מחדש.</p></div></li>
         <li><div><h3>הלקוחה הראשונה</h3><p>ייעוץ, רגישויות, תמחור ותיעוד לפני/אחרי. במסלול המקצועי.</p></div></li>
       </ol>
       <div class="cta-row"><a class="btn" href="#signup">לשריון מקום <span class="arrow" aria-hidden="true">←</span></a></div>
