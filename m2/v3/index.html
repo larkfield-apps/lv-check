@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="description" content="קורס דיגיטלי לעיצוב ושיקום גבות טבעיות עם מעיין אוחיון, מדריכה מוסמכת מטעם InLei®. לומדות למפות, לעצב ולשקם גבות, לעצמך או כמקצוע. 299 ₪.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="קורס דיגיטלי לעיצוב ושיקום גבות טבעיות · מעיין אוחיון">
+<meta property="og:description" content="למפות, לעצב ולשקם גבות טבעיות, לעצמך או כמקצוע. 299 ₪. ההרשמה המוקדמת פתוחה.">
+<meta property="og:image" content="https://larkfield-apps.github.io/mo-course/img/maayan-mannequin.jpg">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
 <title>מעיין אוחיון · קורס דיגיטלי לעיצוב ושיקום גבות טבעיות</title>
 <script>
   // Motion is opt-in: only hide reveal targets when motion is allowed and JS runs.
@@ -233,6 +240,20 @@
   .work-card { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 18px; box-shadow: var(--shadow); transition: transform .6s var(--ease); }
   .work-card:hover { transform: scale(1.03); }
 
+  /* Trust strip: credibility right after the hero */
+  .trust { background: var(--ground); border-bottom: 1px solid var(--line); }
+  .trust-row { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding-block: 1.6rem; text-align: center; }
+  .trust-row li { position: relative; }
+  .trust-row li + li::before { content: ""; position: absolute; inset-inline-start: -.5rem; top: 12%; height: 76%; width: 1px; background: var(--gold); opacity: .45; }
+  .trust-row strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; color: var(--string-deep); }
+  .trust-row span { font-size: .9rem; color: var(--taupe); }
+
+  .price-badge { display: inline-block; font-size: .8rem; font-weight: 600; margin-bottom: .6rem; }
+  .price-note { margin: .9rem 0 0; font-size: .85rem; color: var(--taupe); }
+  .ticks { list-style: none; padding: 0; }
+  .ticks li { position: relative; padding-inline-start: 1.6rem; margin-bottom: .35rem; }
+  .ticks li::before { content: "✓"; position: absolute; inset-inline-start: 0; color: var(--gold); font-weight: 700; }
+
   /* Marquee */
   .marquee { background: var(--plum); color: var(--gold-soft); overflow: hidden; padding-block: .75rem; border-block: 1px solid var(--gold); }
   .marquee-track { display: flex; width: max-content; animation: slide 38s linear infinite; }
@@ -400,6 +421,8 @@
     .mapping-grid { min-height: 0; }
     .facts-row, .tracks { grid-template-columns: 1fr; }
     .devices-grid { grid-template-columns: minmax(0, 1fr); }
+    .trust-row { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .trust-row li:nth-child(3)::before { display: none; }
     .slides.work-slides { grid-auto-columns: 70%; }
     .craft { grid-template-columns: 1fr; gap: 1.8rem; }
     .craft .frame { aspect-ratio: 4 / 3; }
@@ -471,6 +494,15 @@
       <span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span><span>קורס דיגיטלי</span><span>DIGITAL COURSE</span><span>Maayan Ohayon Academy</span>
     </div>
   </div>
+
+  <section class="trust" aria-label="למה סומכים על מעיין">
+    <ul class="wrap trust-row">
+      <li><strong>מדריכה מוסמכת</strong><span>מטעם InLei®</span></li>
+      <li><strong><span class="todo">X שנים</span></strong><span>בתחום הגבות</span></li>
+      <li><strong><span class="todo">X בוגרות</span></strong><span>בקורסים שלה</span></li>
+      <li><strong>אשדוד</strong><span>וגם אונליין</span></li>
+    </ul>
+  </section>
 
   <section class="section devices-section" aria-labelledby="devices-title">
     <div class="wrap devices-grid">
@@ -707,7 +739,7 @@
     <div class="wrap faq">
       <h2 id="faq-title" data-reveal>שאלות</h2>
       <div data-stagger>
-        <details><summary>צריך ניסיון קודם?</summary><p>לא. הקורס מתחיל מהכלים ומהמיפוי.</p></details>
+        <details open><summary>צריך ניסיון קודם?</summary><p>לא. הקורס מתחיל מהכלים ומהמיפוי.</p></details>
         <details><summary>כמה זמן יש גישה לשיעורים?</summary><p><span class="todo">לקבוע: חצי שנה, שנה או לתמיד</span></p></details>
         <details><summary>ערכת כלים כלולה?</summary><p><span class="todo">לקבוע: כלולה, בתוספת תשלום, או רשימת קנייה עם קוד הנחה</span></p></details>
         <details><summary>אפשר לשאול את מעיין שאלות?</summary><p><span class="todo">לקבוע: וואטסאפ, מפגש זום חודשי, או בלי</span></p></details>
@@ -725,8 +757,15 @@
         <h2 id="signup-title" data-reveal>שריינו לי מקום</h2>
         <p class="section-intro" data-reveal>משאירים פרטים, בלי תשלום עכשיו. נרשמות מוקדמות מקבלות הודעה ראשונות כשהקורס נפתח.</p>
         <div class="price-box" data-reveal>
+          <span class="price-badge"><span class="todo">מחיר השקה לנרשמות מוקדמות</span></span>
           <div class="amount">299 <small>₪</small></div>
-          <ul><li>כל שיעורי הקורס</li><li>לשימוש עצמי או כמקצוע</li><li>תעודת השתתפות מטעם האקדמיה</li></ul>
+          <ul class="ticks">
+            <li>כל שיעורי הקורס</li>
+            <li>לשימוש עצמי או כמקצוע</li>
+            <li>תעודת השתתפות מטעם האקדמיה</li>
+            <li><span class="todo">חוברת הקורס להורדה</span></li>
+          </ul>
+          <p class="price-note">בהרשמה המוקדמת לא משלמים כלום. נשלח לך הודעה כשהקורס נפתח.</p>
         </div>
       </div>
       <form id="signup-form" novalidate data-reveal>
@@ -828,6 +867,11 @@
   document.getElementById('car-next').addEventListener('click', function () { slides.scrollBy({ left: -step() }); });
   document.getElementById('car-prev').addEventListener('click', function () { slides.scrollBy({ left: step() }); });
   slides.addEventListener('scroll', function () { clearTimeout(slides._t); slides._t = setTimeout(updateStatus, 80); }, { passive: true });
+  slides.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    slides.scrollBy({ left: e.key === 'ArrowLeft' ? -step() : step() });
+  });
 
   document.getElementById('signup-form').addEventListener('submit', function (e) {
     e.preventDefault();
